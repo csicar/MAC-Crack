@@ -5,4 +5,21 @@ MAC crack
 
 use `[sudo] node main.js [interface]` to start the script.
 This operation will need super user rights.
-`interface` is for ethernet usually eth0 / en0; for wifi wlan0 / en1;
+If the interface is not specified an awful function will try to guess a working interface, so at the moment it's better to specifie the interface.
+
+# How it is working
+
+best discription is pseudo bash:
+```bash
+sudo fing;
+#for each found MAC Address:
+	ifconfig [interface] down;
+	ifconfig [interface] hw ether [MAC Address];
+	ifconfig [interface] up;
+	curl google.com = $out;
+	if[[$out != ""]]then;
+		#,-)
+	else
+		#:-(
+
+```

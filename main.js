@@ -1,6 +1,42 @@
 var fs = require("fs"),
 	exec = require("child_process").exec,
-	platform = process.platform;
+	platform = process.platform,
+	interface = process.argv[2];
+
+function interfaceChecker(callback){
+	if(interface == undefined){
+		log("auto detecting interface...")
+		var interfaces = ["wlan0", "eth0", "en0", "wlan1", "en1"];
+		exec("ifconfig", function(err, stdout, stderr){
+			var i = 0;
+			function next(){
+				if(stdout.match(interfaces[i])){
+					interface = interfaces[i];
+					callback()
+				}else if(i == interfaces.length){
+					log("auto-detection failed.", "error");
+				}else{
+					i += 1;
+					next()
+				}
+			};
+			next();		
+		})
+	}
+}
+
+function log(text, type){
+	var io = {
+		log: function(){
+			console.log("*    "+text);
+		},
+		error: function(){
+			console.log("!!   "+text);
+		}
+	};
+	if(io[type] == undefined){type = "log"};
+	io[type]();
+}
 
 var commands = {
 	changeMAC: {
@@ -49,7 +85,6 @@ function getNodes(callback){
 };
 function tryMacs(macs){
 	var i = 0;
-	var interface = process.argv[2];
 	function next(mac){
 		console.log("*    changing MAC-Address...")
 		exec(command("changeMAC", {interface: interface, MAC: mac}), function(err, stdout, stderr){
@@ -74,7 +109,9 @@ function tryMacs(macs){
 }
 (function(){
 	if(process.env.SUDO_USER || process.env.USER === "root"){
-		getNodes(tryMacs);
+		interfaceChecker(function(){
+			getNodes(tryMacs);
+		});
 	}else{
 		console.log("*   you need to be root to exec this. \n*   Try sudo [the command]")
 	}
