@@ -1,0 +1,9 @@
+{
+	"name": "maccrack",
+	"description": "A Cracking Tool for open Wifis with login pages",
+	"author": "Carsten Csiky <carsten.csiky@gmail.com>",
+	"engine": "node >= 0.4.1",
+	"dependencies" : {},
+	"version": "0.5.0",
+	"preferGlobal": "true"
+}
