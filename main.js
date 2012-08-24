@@ -22,6 +22,8 @@ function interfaceChecker(callback){
 			};
 			next();		
 		})
+	}else{
+		callback();
 	}
 }
 
