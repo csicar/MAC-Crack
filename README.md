@@ -21,5 +21,5 @@ Now the script tests Internet-connectivity. `curl` gets `google.com`.
 
 # **Why** it is working
 
-Networks handle authentification over you MAC-Address (because it's the only thing that can('t) change). 
+Networks handle authentification over your MAC-Address (because it's the only thing that can('t) change). 
 If other devices on the network have rights for internet access, you can use their MAC-Addresses (and Identity) to get Access too.
