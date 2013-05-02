@@ -1,6 +1,11 @@
 MAC crack
 =========
 
+# Installation
+
+* Install `nodejs` from http://nodejs.org/download/
+* download the Ripo as Zip or what ever (and extract it)
+
 # Usage
 
 use `[sudo] node main.js [interface]` to start the script.
